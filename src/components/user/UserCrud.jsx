@@ -8,7 +8,7 @@ const headerProps = {
     subtitle: 'Cadastro de usuários: Incluir, Listar, Alterar e Excluir!'
 }
 
-const baseUrl = 'http://localhost:3001/users'
+//const baseUrl = 'http://localhost:3001/users'
 const initialState = {
     user: { name: '', email: '' },
     list: []
@@ -40,9 +40,10 @@ export default class UserCrud extends Component {
       this.setState({ user: initialState.user })
   }
   save() {
+    /*
     const user = this.state.user
     const method = user.id ? 'put' : 'post'
-    const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
+    //const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
     /*
     axios[method](url, user)
         .then(resp => {
