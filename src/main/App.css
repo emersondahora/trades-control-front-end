@@ -1,17 +1,12 @@
 :root {
     --bg-dark: #1A2F3A;
-
     --logo-height: 100px;
     --header-height: 100px;
     --menu-top-height: 70px;
     --aside-width: 225px;
     --footer-height: 40px;
-
-    --shadow: 
-        0 2px 23px 0 rgba(0, 0, 0, 0.1),
-        0 2px 49px 0 rgba(0, 0, 0, 0.06);
+    --shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.1), 0 2px 49px 0 rgba(0, 0, 0, 0.06);
 }
-
 
 * {
     box-sizing: border-box;
@@ -22,14 +17,8 @@
     margin: 0px;
     display: grid;
     grid-template-columns: var(--aside-width) 1fr;
-    grid-template-rows:
-        var(--header-height)
-        1fr
-        var(--footer-height);
-    grid-template-areas:
-        "logo header"
-        "menu content"
-        "menu footer";
+    grid-template-rows: var(--header-height) 1fr var(--footer-height);
+    grid-template-areas: "header" "menu content" "menu footer";
     height: 100vh;
     background-color: #F5F5F5;
 }
@@ -54,32 +43,33 @@ footer.footer {
     grid-area: footer;
 }
 
-    .app {
-        grid-template-rows:
-            var(--header-height)
-            var(--menu-top-height)
-            1fr
-            var(--footer-height);
-        grid-template-columns: var(--aside-width) 1fr;
-        grid-template-areas:
-            "logo header"
-            "menu menu"
-            "content content"
-            "footer footer";
-    }
+.app {
+    grid-template-rows: var(--header-height) var(--menu-top-height) 1fr var(--footer-height);
+    grid-template-columns: var(--aside-width) 1fr;
+    grid-template-areas: "header header" "menu menu" "content content" "footer footer";
+}
 
 @media(max-width: 576px) {
     .app {
-        grid-template-rows:
-            var(--logo-height)
-            var(--menu-top-height)
-            1fr
-            var(--footer-height);
+        grid-template-rows: var(--logo-height) var(--menu-top-height) 1fr var(--footer-height);
         grid-template-columns: 1fr;
-        grid-template-areas:
-            "logo"
-            "menu"
-            "content"
-            "footer";
+        grid-template-areas: "logo" "menu" "content" "footer";
     }
+}
+
+.input-bottom input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-bottom button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-top: -3px;
+}
+
+.header-bottons {
+    display: flex!important;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
