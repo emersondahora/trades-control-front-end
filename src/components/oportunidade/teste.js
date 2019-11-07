@@ -1,0 +1,1 @@
+let pegar dados = async
