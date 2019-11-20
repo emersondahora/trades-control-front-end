@@ -18,10 +18,9 @@ const headerProps = {
   subtitle: 'Lista das oportunidades de operações que surgiram no mercado'
 }
 
-//const baseUrl = 'http://localhost:3001/users'
 const initialState = {
   show_filtro: false,
-  tela: 'relatorio',
+  tela: 'formulario',
   filtro: {
     data_inicial: new Date(),
     data_final: new Date()
@@ -40,7 +39,6 @@ export default class Oportunidade extends Component {
     this.filtrarRelatorio();
   }
   filtrarRelatorio() {
-    console.log(this.state.filtro);
     api.get('/oportunidade', { params: this.state.filtro })
       .then(res => {
         this.setState({ list: res.data })

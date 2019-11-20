@@ -17,7 +17,6 @@ export default class MercadoTable extends Component {
     listProcessada: []
   }
   processarLista(list) {
-    console.log(list);
     if (list) {
       let listProcessada = list.reduce((prev, item) => {
         let list = [], itemCurrent;

@@ -4,9 +4,10 @@ import dominio from '../../common/dominios'
 import CandleMarketChart from '../template/CandleMarketChart'
 import OportunidadeTable from './OportunidadeTable'
 import api from '../../services/api'
+import { format } from 'date-fns';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { faDollarSign, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const initialState = {
     dados: {
@@ -30,73 +31,9 @@ export default class OportunidadeForm extends Component {
     state = {
         showChart: false,
         dominio: {},
-        mercado: [{ candle: 1, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102300, ponto_maxima: 102400, ponto_minima: 102300, ponto_fechamento: 102400 },
-        { candle: 2, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102400, ponto_maxima: 102500, ponto_minima: 102400, ponto_fechamento: 102500 },
-        { candle: 3, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102500, ponto_maxima: 102600, ponto_minima: 102500, ponto_fechamento: 102600 },
-        { candle: 4, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102600, ponto_maxima: 102700, ponto_minima: 102600, ponto_fechamento: 102700 },
-        { candle: 5, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102700, ponto_maxima: 102800, ponto_minima: 102700, ponto_fechamento: 102800 },
-        { candle: 6, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102800, ponto_maxima: 102900, ponto_minima: 102800, ponto_fechamento: 102900 },
-        { candle: 7, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 102900, ponto_maxima: 103000, ponto_minima: 102900, ponto_fechamento: 103000 },
-        { candle: 8, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 103000, ponto_maxima: 103100, ponto_minima: 103000, ponto_fechamento: 103100 },
-        { candle: 9, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 103100, ponto_maxima: 103200, ponto_minima: 103100, ponto_fechamento: 103200 },
-        { candle: 10, data: '11/10/2019', hora: '09:03:00', ponto_abertura: 103200, ponto_maxima: 103300, ponto_minima: 103140, ponto_fechamento: 103300 },
-        { candle: 11, data: '11/10/2019', hora: '09:04:00', ponto_abertura: 103200, ponto_maxima: 103360, ponto_minima: 103100, ponto_fechamento: 103100 },
-        { candle: 12, data: '11/10/2019', hora: '09:13:00', ponto_abertura: 103100, ponto_maxima: 103140, ponto_minima: 103000, ponto_fechamento: 103000 },
-        { candle: 13, data: '11/10/2019', hora: '09:27:00', ponto_abertura: 103000, ponto_maxima: 103100, ponto_minima: 102900, ponto_fechamento: 102900 },
-        { candle: 14, data: '11/10/2019', hora: '10:04:00', ponto_abertura: 103000, ponto_maxima: 103100, ponto_minima: 102835, ponto_fechamento: 103100 },
-        { candle: 15, data: '11/10/2019', hora: '10:25:00', ponto_abertura: 103100, ponto_maxima: 103200, ponto_minima: 103090, ponto_fechamento: 103200 },
-        { candle: 16, data: '11/10/2019', hora: '10:30:00', ponto_abertura: 103200, ponto_maxima: 103300, ponto_minima: 103130, ponto_fechamento: 103300 },
-        { candle: 17, data: '11/10/2019', hora: '10:33:00', ponto_abertura: 103300, ponto_maxima: 103400, ponto_minima: 103290, ponto_fechamento: 103400 },
-        { candle: 18, data: '11/10/2019', hora: '10:33:00', ponto_abertura: 103400, ponto_maxima: 103500, ponto_minima: 103350, ponto_fechamento: 103500 },
-        { candle: 19, data: '11/10/2019', hora: '10:37:00', ponto_abertura: 103500, ponto_maxima: 103600, ponto_minima: 103380, ponto_fechamento: 103600 },
-        { candle: 20, data: '11/10/2019', hora: '10:49:00', ponto_abertura: 103600, ponto_maxima: 103700, ponto_minima: 103600, ponto_fechamento: 103700 },
-        { candle: 21, data: '11/10/2019', hora: '10:50:00', ponto_abertura: 103700, ponto_maxima: 103800, ponto_minima: 103555, ponto_fechamento: 103800 },
-        { candle: 22, data: '11/10/2019', hora: '11:08:00', ponto_abertura: 103800, ponto_maxima: 103900, ponto_minima: 103765, ponto_fechamento: 103900 },
-        { candle: 23, data: '11/10/2019', hora: '11:13:00', ponto_abertura: 103900, ponto_maxima: 104000, ponto_minima: 103900, ponto_fechamento: 104000 },
-        { candle: 24, data: '11/10/2019', hora: '11:13:00', ponto_abertura: 104000, ponto_maxima: 104100, ponto_minima: 103945, ponto_fechamento: 104100 },
-        { candle: 25, data: '11/10/2019', hora: '11:14:00', ponto_abertura: 104000, ponto_maxima: 104125, ponto_minima: 103900, ponto_fechamento: 103900 },
-        { candle: 26, data: '11/10/2019', hora: '11:15:00', ponto_abertura: 104000, ponto_maxima: 104100, ponto_minima: 103885, ponto_fechamento: 104100 },
-        { candle: 27, data: '11/10/2019', hora: '11:31:00', ponto_abertura: 104000, ponto_maxima: 104170, ponto_minima: 103900, ponto_fechamento: 103900 },
-        { candle: 28, data: '11/10/2019', hora: '11:34:00', ponto_abertura: 104000, ponto_maxima: 104100, ponto_minima: 103825, ponto_fechamento: 104100 },
-        { candle: 29, data: '11/10/2019', hora: '12:20:00', ponto_abertura: 104100, ponto_maxima: 104200, ponto_minima: 104085, ponto_fechamento: 104200 },
-
-        { candle: 30, data: '11/10/2019', hora: '12:20:00', ponto_abertura: 104100, ponto_maxima: 104255, ponto_minima: 104000, ponto_fechamento: 104000 },
-        { candle: 31, data: '11/10/2019', hora: '12:41:00', ponto_abertura: 104000, ponto_maxima: 104045, ponto_minima: 103900, ponto_fechamento: 103900 },
-        { candle: 32, data: '11/10/2019', hora: '12:47:00', ponto_abertura: 103900, ponto_maxima: 104095, ponto_minima: 103800, ponto_fechamento: 103800 },
-        { candle: 33, data: '11/10/2019', hora: '13:32:00', ponto_abertura: 103900, ponto_maxima: 104000, ponto_minima: 103705, ponto_fechamento: 104000 },
-        { candle: 34, data: '11/10/2019', hora: '13:45:00', ponto_abertura: 104000, ponto_maxima: 104100, ponto_minima: 103980, ponto_fechamento: 104100 },
-        { candle: 35, data: '11/10/2019', hora: '13:49:00', ponto_abertura: 104000, ponto_maxima: 104190, ponto_minima: 103900, ponto_fechamento: 103900 },
-        { candle: 36, data: '11/10/2019', hora: '14:06:00', ponto_abertura: 103900, ponto_maxima: 103930, ponto_minima: 103800, ponto_fechamento: 103800 },
-        { candle: 37, data: '11/10/2019', hora: '14:24:00', ponto_abertura: 103900, ponto_maxima: 104000, ponto_minima: 103715, ponto_fechamento: 104000 },
-        { candle: 38, data: '11/10/2019', hora: '14:26:00', ponto_abertura: 104000, ponto_maxima: 104100, ponto_minima: 103930, ponto_fechamento: 104100 },
-        { candle: 39, data: '11/10/2019', hora: '14:27:00', ponto_abertura: 104100, ponto_maxima: 104200, ponto_minima: 104050, ponto_fechamento: 104200 },
-        { candle: 40, data: '11/10/2019', hora: '14:27:00', ponto_abertura: 104200, ponto_maxima: 104300, ponto_minima: 104200, ponto_fechamento: 104300 },
-        { candle: 41, data: '11/10/2019', hora: '14:27:00', ponto_abertura: 104300, ponto_maxima: 104400, ponto_minima: 104275, ponto_fechamento: 104400 },
-        { candle: 42, data: '11/10/2019', hora: '14:27:00', ponto_abertura: 104400, ponto_maxima: 104500, ponto_minima: 104400, ponto_fechamento: 104500 },
-        { candle: 43, data: '11/10/2019', hora: '14:27:00', ponto_abertura: 104500, ponto_maxima: 104600, ponto_minima: 104440, ponto_fechamento: 104600 },
-        { candle: 44, data: '11/10/2019', hora: '14:27:00', ponto_abertura: 104500, ponto_maxima: 104610, ponto_minima: 104400, ponto_fechamento: 104400 },
-        { candle: 45, data: '11/10/2019', hora: '14:28:00', ponto_abertura: 104400, ponto_maxima: 104475, ponto_minima: 104300, ponto_fechamento: 104300 },
-        { candle: 46, data: '11/10/2019', hora: '14:28:00', ponto_abertura: 104300, ponto_maxima: 104335, ponto_minima: 104200, ponto_fechamento: 104200 },
-        { candle: 47, data: '11/10/2019', hora: '14:28:00', ponto_abertura: 104300, ponto_maxima: 104400, ponto_minima: 104100, ponto_fechamento: 104400 },
-        { candle: 48, data: '11/10/2019', hora: '14:32:00', ponto_abertura: 104300, ponto_maxima: 104450, ponto_minima: 104200, ponto_fechamento: 104200 },
-        { candle: 49, data: '11/10/2019', hora: '14:34:00', ponto_abertura: 104200, ponto_maxima: 104255, ponto_minima: 104100, ponto_fechamento: 104100 },
-        { candle: 50, data: '11/10/2019', hora: '14:37:00', ponto_abertura: 104100, ponto_maxima: 104220, ponto_minima: 104000, ponto_fechamento: 104000 },
-        { candle: 51, data: '11/10/2019', hora: '14:53:00', ponto_abertura: 104000, ponto_maxima: 104080, ponto_minima: 103900, ponto_fechamento: 103900 },
-        { candle: 52, data: '11/10/2019', hora: '15:00:00', ponto_abertura: 103900, ponto_maxima: 103940, ponto_minima: 103800, ponto_fechamento: 103800 },
-        { candle: 53, data: '11/10/2019', hora: '15:05:00', ponto_abertura: 103800, ponto_maxima: 103800, ponto_minima: 103700, ponto_fechamento: 103700 },
-        { candle: 54, data: '11/10/2019', hora: '15:06:00', ponto_abertura: 103700, ponto_maxima: 103710, ponto_minima: 103600, ponto_fechamento: 103600 },
-        { candle: 55, data: '11/10/2019', hora: '15:06:00', ponto_abertura: 103700, ponto_maxima: 103800, ponto_minima: 103595, ponto_fechamento: 103800 },
-        { candle: 56, data: '11/10/2019', hora: '15:07:00', ponto_abertura: 103800, ponto_maxima: 103900, ponto_minima: 103630, ponto_fechamento: 103900 },
-        { candle: 57, data: '11/10/2019', hora: '15:45:00', ponto_abertura: 103800, ponto_maxima: 103940, ponto_minima: 103700, ponto_fechamento: 103700 },
-        { candle: 58, data: '11/10/2019', hora: '16:10:00', ponto_abertura: 103800, ponto_maxima: 103900, ponto_minima: 103650, ponto_fechamento: 103900 },
-        { candle: 59, data: '11/10/2019', hora: '16:35:00', ponto_abertura: 103900, ponto_maxima: 104000, ponto_minima: 103900, ponto_fechamento: 104000 },
-        { candle: 60, data: '11/10/2019', hora: '16:35:00', ponto_abertura: 104000, ponto_maxima: 104100, ponto_minima: 103895, ponto_fechamento: 104100 },
-        { candle: 61, data: '11/10/2019', hora: '16:39:00', ponto_abertura: 104000, ponto_maxima: 104200, ponto_minima: 103900, ponto_fechamento: 103900 },
-        { candle: 62, data: '11/10/2019', hora: '16:46:00', ponto_abertura: 103900, ponto_maxima: 104030, ponto_minima: 103800, ponto_fechamento: 103800 },
-        { candle: 63, data: '11/10/2019', hora: '17:00:00', ponto_abertura: 103800, ponto_maxima: 103925, ponto_minima: 103700, ponto_fechamento: 103700 },
-        { candle: 64, data: '11/10/2019', hora: '17:27:00', ponto_abertura: 103700, ponto_maxima: 103795, ponto_minima: 103600, ponto_fechamento: 103600 },
-        { candle: 65, data: '11/10/2019', hora: '18:01:00', ponto_abertura: 103600, ponto_maxima: 103600, ponto_minima: 103500, ponto_fechamento: 103500 }
-        ],
+        loadedChart: false,
+        loadingChart:false,
+        mercado: [],
         dados: { ...initialState.dados },
         list: [],
     }
@@ -129,25 +66,25 @@ export default class OportunidadeForm extends Component {
         let mercado = [...this.state.mercado]
         let dados = { ...this.state.dados }
 
-        dados.direcao = mercado[candleIndex].ponto_abertura > mercado[candleIndex].ponto_fechamento ? 'Vendido' : 'Comprado'
+        dados.direcao = mercado[candleIndex].abertura > mercado[candleIndex].fechamento ? 'Vendido' : 'Comprado'
         dados.hora_entrada = mercado[candleIndex + 1].hora;
         dados.hora_saida = mercado[candleIndex + 2].hora;
-        dados.ponto_entrada = mercado[candleIndex].ponto_fechamento;
+        dados.ponto_entrada = mercado[candleIndex].fechamento;
 
         for (let i = candleIndex + 1; i < mercado.length; i++) {
             let candle = mercado[i];
             let candleAnterior = mercado[i - 1];
-            let direcao = candle.ponto_abertura > candle.ponto_fechamento ? 'Vendido' : 'Comprado'
+            let direcao = candle.abertura > candle.fechamento ? 'Vendido' : 'Comprado'
             //let proxCandle = mercado[i+1]
 
             if (i === candleIndex + 1 && dados.direcao !== direcao) {
-                dados.ponto_saida = candle.ponto_fechamento;
+                dados.ponto_saida = candle.fechamento;
                 dados.hora_reversao = candle.hora;
                 break;
             }
             if (dados.direcao !== direcao) {
                 dados.hora_reversao = candle.hora;
-                dados.ponto_saida = candleAnterior.ponto_fechamento;
+                dados.ponto_saida = candleAnterior.fechamento;
                 break;
             }
         }
@@ -160,7 +97,14 @@ export default class OportunidadeForm extends Component {
 
     }
     findChart() {
-        this.setState({ showChart: true }) 
+        this.setState({ loadingChart: true }, () => {
+            api.get('/mercado', { params: {data: format(this.state.dados.data, 'yyyy-MM-dd')} })
+            .then(res => {
+                console.log('ended')
+                this.setState({ mercado: res.data, showChart: true, loadingChart: false, loadedChart: true })
+            })
+
+        }) 
     }
     adicionarLista() {
         let list = [...this.state.list]
@@ -181,16 +125,15 @@ export default class OportunidadeForm extends Component {
     }
 
     renderChart() {
-        if (this.state.showChart) {
+        if (this.state.showChart && this.state.mercado.length > 0 ) {
             let dataChart = this.state.mercado.map(item => {
                 const [hora, minuto] = item.hora.split(':')
-                return { x: `${hora}:${minuto}`, y: [item.ponto_abertura, item.ponto_maxima, item.ponto_minima, item.ponto_fechamento] }
+                return { x: `${hora}:${minuto}`, y: [item.abertura, item.maxima, item.minima, item.fechamento] }
             })
             return (
                 <div>
                     <CandleMarketChart
                         onSelectCandle={(candle) => this.selectChartCandle(candle)}
-                        titulo="Mercado dia 11/10/2019"
                         dados={dataChart} />
                     <hr />
                 </div>
@@ -213,13 +156,18 @@ export default class OportunidadeForm extends Component {
                             <div className="input input-bottom">
                                 <DatePicker type="text" className="form-control"
                                     selected={this.state.dados.data}
-                                    onChange={value => this.updateField(null, 'data', value)}
+                                    onChange={value => { 
+                                                            this.updateField(null, 'data', value) 
+                                                            this.setState({loadedChart:false})
+                                                        }}
                                     dateFormat="dd/MM/yyyy"
                                     name="data_inicial"
                                     placeholder="Selecione a data Inicial..." />
-                                <button className="btn  btn-secondary"
-                                    onClick={() => this.findChart()} >
-                                    <FontAwesomeIcon icon={faDollarSign} />
+                                <button className={['btn',  !this.state.loadedChart || this.state.mercado.length ? 'btn-primary' : 'btn-danger'].join( ' ')}
+                                    onClick={() => this.findChart()} 
+                                    disabled={this.state.loadedChart || this.state.loadingChart}>
+                                    <FontAwesomeIcon icon={this.state.loadingChart?faSpinner:faDollarSign} 
+                                    spin={this.state.loadingChart} />
                                 </button>
                             </div>
                         </div>

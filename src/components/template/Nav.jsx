@@ -16,5 +16,8 @@ export default props =>
             <Link to="/oportunidade">
                 <i className="fa fa-bar-chart"></i> Oportunidades
             </Link>
+            <Link to="/relatorio">
+                <i className="fa fa-line-chart"></i> Relatórios
+            </Link>
         </nav>
     </aside>

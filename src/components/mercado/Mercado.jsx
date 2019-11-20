@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import api from '../../services/api'
-import CandleMarketChart from '../template/CandleMarketChart'
 import {
     format, subDays
 } from 'date-fns';
 //import axios from 'axios' 
+import CandleMarketChart from '../template/CandleMarketChart'
 import Main from '../template/Main'
 
 import MercadoImportar from './MercadoImportar'
@@ -46,7 +46,6 @@ export default class Mercado extends Component {
         filtro.data = format(filtro.data, 'yyyy-MM-dd')
         api.get('/mercado', { params: filtro })
             .then(res => {
-                console.log(res.data)
                 this.setState({ list: res.data })
 
             })
